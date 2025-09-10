@@ -355,7 +355,7 @@ nav a:hover::after {
   font-weight: 500;
 }
 
-/* Services Section */
+/* Oferta Section */
 #oferta {
   padding: 5rem 0;
   position: relative;
@@ -465,7 +465,71 @@ nav a:hover::after {
   transition: all 0.3s;
 }
 
-/* About Section */
+/* ================================= */
+/* ===== Sekcja Nasze Realizacje ===== */
+/* ================================= */
+#realizacje {
+  padding: 5rem 0;
+  background: white; /* Użyj var(--light), jeśli wolisz jaśniejsze tło */
+  position: relative;
+}
+
+.realizacje-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.realizacja-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.realizacja-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 25px 40px rgba(0, 0, 0, 0.12);
+}
+
+.realizacja-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover; /* Gwarantuje, że obraz wypełni przestrzeń bez zniekształceń */
+  transition: transform 0.4s ease;
+}
+
+.realizacja-card:hover img {
+  transform: scale(1.05);
+}
+
+.realizacja-content {
+  padding: 1.5rem 2rem 2rem;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.realizacja-content h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.75rem;
+  font-weight: 700;
+  color: var(--dark);
+}
+
+.realizacja-content p {
+  color: var(--gray);
+  line-height: 1.7;
+  flex-grow: 1;
+}
+
+/* O-firmie Section */
 #o-firmie {
   padding: 5rem 0;
   background: var(--light);
@@ -821,15 +885,15 @@ footer {
 
   /* ZMIANA: Poprawa wyglądu sekcji Hero na mobilnych */
   #hero {
-    min-height: auto; 
-    padding: 10rem 0 5rem; 
+    min-height: auto;
+    padding: 10rem 0 5rem;
     display: flex;
     justify-content: center;
   }
 
   .hero-content {
     text-align: center;
-    padding: 0 1rem; 
+    padding: 0 1rem;
   }
 
   .hero-content h1 {
