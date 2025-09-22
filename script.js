@@ -5,7 +5,7 @@ window.addEventListener("load", () => {
   }, 1000);
 });
 
-// animacja hero
+// animacja particles na glownej stronie
 function createParticles() {
   const particlesContainer = document.getElementById("particles");
   const particleCount = 50;
