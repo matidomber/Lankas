@@ -512,80 +512,155 @@ nav a:hover::after {
 /* O-firmie Section */
 #o-firmie {
   padding: 5rem 0;
-  background: var(--light);
+  background: white; /* Zmiana tła dla lepszego oddzielenia sekcji */
   position: relative;
   overflow: hidden;
 }
 
-.about-container {
-  max-width: 1200px;
+.o-firmie-container {
+  max-width: 1100px;
   margin: 0 auto;
   padding: 0 2rem;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4rem;
-  align-items: center;
 }
 
-.about-image {
-  position: relative;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
-  transform: perspective(1000px) rotateY(-5deg);
-  transition: transform 0.5s;
+/* 1. Wprowadzenie - Lider Firmy */
+.founder-intro {
+  text-align: center;
+  margin-bottom: 5rem;
 }
 
-.about-image:hover {
-  transform: perspective(1000px) rotateY(0deg);
-}
-
-.about-image img {
-  width: 135%;
-  height: auto;
-  display: block;
-}
-
-.about-content h3 {
-  font-size: 2rem;
+.founder-photo {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
   margin-bottom: 1.5rem;
-  font-weight: 700;
+  box-shadow: 0 10px 30px rgba(0, 162, 226, 0.2);
+  border: 4px solid white;
+}
+
+.founder-intro h2 {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: 800;
   background: var(--gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  margin-bottom: 1.5rem;
 }
 
-.about-content p {
+.founder-intro blockquote {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  color: var(--gray);
+  max-width: 800px;
+  margin: 0 auto;
+  font-style: italic;
+  border: none;
+  padding: 0;
+}
+
+.founder-intro blockquote footer {
+  font-style: normal;
+  font-weight: 600;
+  color: var(--dark);
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+
+/* 2. Historia i Wartości */
+.about-main-content {
+  display: grid;
+  grid-template-columns: 3fr 2fr; /* Tekst zajmuje więcej miejsca */
+  gap: 3rem;
+  align-items: center;
+}
+
+.about-text-content h3 {
+  font-size: clamp(1.8rem, 4vw, 2.2rem);
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: var(--dark);
+}
+
+.about-text-content p {
+  font-size: 1.1rem;
   color: var(--gray);
   line-height: 1.8;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.value-props-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.value-prop {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.value-prop i {
+  font-size: 2rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.value-prop h4 {
   font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  color: var(--dark);
 }
 
-.features-list {
-  list-style: none;
-  margin: 2rem 0;
+.value-prop p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--gray);
+  margin-bottom: 0;
 }
 
-.features-list li {
-  padding: 0.75rem 0;
+.about-image-new img {
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+}
+
+/* 3. Sekcja z Partnerami */
+.partners-section {
+  margin-top: 5rem;
+  text-align: center;
+}
+
+.partners-section h3 {
+  font-size: 1.2rem;
+  color: var(--gray);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 2rem;
+}
+
+.partners-logos {
   display: flex;
-  align-items: center;
-  gap: 1rem;
-  font-weight: 500;
-}
-
-.features-list li::before {
-  content: "✓";
-  width: 30px;
-  height: 30px;
-  background: var(--gradient);
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
   justify-content: center;
-  flex-shrink: 0;
+  align-items: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.partners-logos img {
+  height: 40px; /* Dopasuj wysokość do swoich logotypów */
+  opacity: 0.6;
+  filter: grayscale(100%);
+  transition: all 0.3s ease;
+}
+
+.partners-logos img:hover {
+  opacity: 1;
+  filter: grayscale(0%);
+  transform: scale(1.1);
 }
 
 /* Contact Section */
@@ -832,11 +907,24 @@ footer {
   .map-container {
     height: 350px; /* ZMIANA: */
   }
+
+  .about-main-content {
+    grid-template-columns: 1fr;
+  }
+  .about-image-new {
+    order: -1; /* Obrazek idzie na górę na tabletach */
+    max-width: 400px;
+    margin: 0 auto 3rem;
+  }
 }
 
 @media (max-width: 768px) {
   .menu-toggle {
     display: flex;
+  }
+
+  .founder-intro {
+    margin-bottom: 4rem;
   }
 
   nav {
@@ -865,8 +953,8 @@ footer {
 
   /* ZMIANA: Poprawa wyglądu sekcji Hero na mobilnych */
   #hero {
-    min-height: auto;
-    padding: 10rem 0 5rem;
+    min-height: 100hv;
+    padding: 5rem 0 5rem;
     display: flex;
     justify-content: center;
   }
@@ -957,5 +1045,17 @@ footer {
 
   .map-container {
     margin-top: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .value-props-grid {
+    grid-template-columns: 1fr; /* Jedna kolumna na mobilnych */
+  }
+  .partners-logos {
+    gap: 2rem;
+  }
+  .partners-logos img {
+    height: 30px;
   }
 }
