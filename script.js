@@ -100,7 +100,6 @@ function startCounting() {
   counted = true;
 }
 
-// Start counting when stats section is visible
 window.addEventListener("scroll", () => {
   const statsSection = document.querySelector(".stats-section");
   if (statsSection) {
@@ -112,7 +111,7 @@ window.addEventListener("scroll", () => {
   }
 });
 
-// Form handling
+
 document.getElementById("contactForm").addEventListener("submit", function (e) {
   e.preventDefault();
 
@@ -136,7 +135,7 @@ document.getElementById("contactForm").addEventListener("submit", function (e) {
 // stopka rok
 document.getElementById("year").textContent = new Date().getFullYear();
 
-// Parallax effect for hero
+
 window.addEventListener("scroll", () => {
   const scrolled = window.pageYOffset;
   const hero = document.getElementById("hero");
@@ -145,7 +144,7 @@ window.addEventListener("scroll", () => {
   }
 });
 
-// Mouse move effect for service cards
+
 document.querySelectorAll(".service-card").forEach((card) => {
   card.addEventListener("mousemove", (e) => {
     const rect = card.getBoundingClientRect();
@@ -164,7 +163,7 @@ document.querySelectorAll(".service-card").forEach((card) => {
   });
 });
 
-// Add typing effect to hero title
+
 const heroTitle = document.querySelector(".hero-content h1");
 if (heroTitle) {
   const text = heroTitle.textContent;
@@ -181,7 +180,6 @@ if (heroTitle) {
   setTimeout(typeWriter, 1500);
 }
 
-// NOWOŚĆ: Logika dla przycisku "Powrót na górę"
 const backToTopBtn = document.getElementById("backToTopBtn");
 
 window.addEventListener("scroll", () => {

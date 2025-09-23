@@ -512,7 +512,7 @@ nav a:hover::after {
 /* O-firmie Section */
 #o-firmie {
   padding: 5rem 0;
-  background: white; /* Zmiana tła dla lepszego oddzielenia sekcji */
+  background: var(--light); /* Zmiana tła dla lepszego oddzielenia sekcji */
   position: relative;
   overflow: hidden;
 }
