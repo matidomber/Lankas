@@ -447,6 +447,66 @@ nav a:hover::after {
   letter-spacing: 0.5px;
 }
 
+/* Style dla siatki pozostałych usług */
+.secondary-services-header {
+  text-align: center;
+  margin-top: 5rem;
+  margin-bottom: 2rem;
+}
+
+.secondary-services-header h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--dark);
+  position: relative;
+  display: inline-block;
+}
+
+/* Ozdobna linia pod nagłówkiem */
+.secondary-services-header h3::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: var(--primary);
+  border-radius: 3px;
+}
+
+.secondary-services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+.secondary-service-card {
+  background: white;
+  border-radius: 15px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+}
+
+.secondary-service-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+}
+
+.secondary-service-card .service-icon {
+  margin: 0 auto 1rem;
+  background: transparent; /* Usuwamy tło z oryginalnych ikon */
+}
+
+.secondary-service-card h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--dark);
+}
+
 /* Sekcja Nasze Realizacje */
 #realizacje {
   padding: 5rem 0;
@@ -523,54 +583,10 @@ nav a:hover::after {
   padding: 0 2rem;
 }
 
-/* 1. Wprowadzenie - Lider Firmy */
-.founder-intro {
-  text-align: center;
-  margin-bottom: 5rem;
-}
-
-.founder-photo {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 10px 30px rgba(0, 162, 226, 0.2);
-  border: 4px solid white;
-}
-
-.founder-intro h2 {
-  font-size: clamp(2rem, 4vw, 2.5rem);
-  font-weight: 800;
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 1.5rem;
-}
-
-.founder-intro blockquote {
-  font-size: 1.2rem;
-  line-height: 1.8;
-  color: var(--gray);
-  max-width: 800px;
-  margin: 0 auto;
-  font-style: italic;
-  border: none;
-  padding: 0;
-}
-
-.founder-intro blockquote footer {
-  font-style: normal;
-  font-weight: 600;
-  color: var(--dark);
-  margin-top: 1rem;
-  font-size: 1rem;
-}
-
 /* 2. Historia i Wartości */
 .about-main-content {
   display: grid;
-  grid-template-columns: 3fr 2fr; /* Tekst zajmuje więcej miejsca */
+  grid-template-columns: 3fr 2fr;
   gap: 3rem;
   align-items: center;
 }
@@ -651,7 +667,7 @@ nav a:hover::after {
 }
 
 .partners-logos img {
-  height: 40px; /* Dopasuj wysokość do swoich logotypów */
+  height: 40px;
   opacity: 0.6;
   filter: grayscale(100%);
   transition: all 0.3s ease;
@@ -661,6 +677,12 @@ nav a:hover::after {
   opacity: 1;
   filter: grayscale(0%);
   transform: scale(1.1);
+}
+
+#o-firmie .section-title img {
+  max-width: 350px; 
+  width: 80%;
+  height: auto;
 }
 
 /* Contact Section */
