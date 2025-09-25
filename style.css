@@ -282,11 +282,11 @@ nav a:hover::after {
   display: inline-block;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
 .btn-primary:hover {
   transform: translateY(-3px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
 }
 
 .btn-secondary {
@@ -1082,9 +1082,9 @@ footer {
   }
 }
 
-/* =============================== */
+/* ======================================= */
 /* ===== Style dla podstrony Usługi ===== */
-/* =============================== */
+/* ======================================= */
 .page-container {
   padding-top: 120px; /* Odsunięcie treści od stałego nagłówka */
 }
@@ -1102,42 +1102,93 @@ footer {
   gap: 2rem;
 }
 
+/* ZMIENIONE STYLE KARTY */
 .service-detail-card {
   background: white;
   border-radius: 20px;
-  padding: 2.5rem;
   border: 1px solid #e2e8f0;
   display: flex;
   flex-direction: column;
   transition: all 0.3s ease;
+  overflow: hidden; /* Ukrywa wystające rogi obrazka */
 }
 
 .service-detail-card:hover {
   transform: translateY(-5px);
   border-color: var(--primary);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+  box-shadow: 0 10px;
 }
 
-.service-detail-card .service-icon {
-  margin-bottom: 1.5rem;
-  background: transparent;
+/* NOWE STYLE DLA OBRAZKA */
+.service-card-img {
+  width: 100%;
+  height: 200px; /* Stała wysokość dla wszystkich obrazków */
+  object-fit: cover; /* Gwarantuje, że obraz wypełni przestrzeń bez zniekształceń */
+  transition: transform 0.3s ease;
 }
 
-.service-detail-card h3 {
+.service-detail-card:hover .service-card-img {
+  transform: scale(1.05); /* Lekkie powiększenie obrazka po najechaniu */
+}
+
+/* NOWE STYLE DLA TREŚCI KARTY */
+.service-card-content {
+  padding: 1.5rem 2rem 2rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Wyrównuje karty w jednym rzędzie do tej samej wysokości */
+}
+
+.service-card-content h3 {
   font-size: 1.5rem;
   font-weight: 700;
   color: var(--dark);
   margin-bottom: 1rem;
 }
 
-.service-detail-card p {
+.service-card-content p {
   color: var(--gray);
   line-height: 1.7;
-  flex-grow: 1; /* Sprawia, że karty w jednym rzędzie mają tę samą wysokość */
+  flex-grow: 1;
 }
 
 /* Przycisk na stronie głównej */
 .view-all-services-container {
   text-align: center;
   margin-top: 4rem;
+}
+
+/* ======================================= */
+/* ===== Nawigacja Okruszkowa (Breadcrumbs) ===== */
+/* ======================================= */
+.breadcrumbs-container {
+  padding-top: 80px; /* Odsunięcie od stałego nagłówka */
+  background-color: var(--light);
+  padding-bottom: 1.5rem;
+  padding-top: calc(
+    80px + 1.5rem
+  ); /* 80px to wysokość navbara + dodatkowy padding */
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.breadcrumbs {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  font-size: 0.9rem;
+  color: var(--gray);
+}
+
+.breadcrumbs a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.breadcrumbs a:hover {
+  color: var(--primary-dark);
+}
+
+.breadcrumbs span {
+  margin: 0 0.5rem;
 }
