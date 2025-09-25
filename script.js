@@ -113,25 +113,28 @@ window.addEventListener("scroll", () => {
 });
 
 
-document.getElementById("contactForm").addEventListener("submit", function (e) {
-  e.preventDefault();
+const contactForm = document.getElementById("contactForm");
+if (contactForm) {
+  contactForm.addEventListener("submit", function (e) {
+    e.preventDefault();
 
-  const button = this.querySelector(".form-button");
-  const originalText = button.textContent;
-  button.textContent = "Wysyłanie...";
-  button.style.background = "var(--gradient)";
-
-  setTimeout(() => {
-    button.textContent = "Wysłano! ✓";
-    button.style.background = "#10B981";
+    const button = this.querySelector(".form-button");
+    const originalText = button.textContent;
+    button.textContent = "Wysyłanie...";
+    button.style.background = "var(--gradient)";
 
     setTimeout(() => {
-      button.textContent = originalText;
-      button.style.background = "white";
-      this.reset();
-    }, 2000);
-  }, 1500);
-});
+      button.textContent = "Wysłano! ✓";
+      button.style.background = "#10B981";
+
+      setTimeout(() => {
+        button.textContent = originalText;
+        button.style.background = "white";
+        this.reset();
+      }, 2000);
+    }, 1500);
+  });
+}
 
 // stopka rok
 document.getElementById("year").textContent = new Date().getFullYear();
