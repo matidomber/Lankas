@@ -8,6 +8,7 @@ window.addEventListener("load", () => {
 // animacja particles na glownej stronie
 function createParticles() {
   const particlesContainer = document.getElementById("particles");
+  if (!particlesContainer) return;
   const particleCount = 50;
 
   for (let i = 0; i < particleCount; i++) {
