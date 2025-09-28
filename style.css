@@ -322,7 +322,7 @@ nav a:hover::after {
 /* Stats Section */
 .stats-section {
   padding: 5rem 0;
-  background: var(--light);
+  background: white;
   position: relative;
 }
 
