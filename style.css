@@ -498,7 +498,7 @@ nav a:hover::after {
 
 .secondary-service-card .service-icon {
   margin: 0 auto 1rem;
-  background: transparent; /* Usuwamy tło z oryginalnych ikon */
+  background: transparent;
 }
 
 .secondary-service-card h4 {
@@ -531,11 +531,34 @@ nav a:hover::after {
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   display: flex;
   flex-direction: column;
+  position: relative;
+  cursor: pointer;
 }
 
 .realizacja-card:hover {
   transform: translateY(-10px);
   box-shadow: 0 25px 40px rgba(0, 0, 0, 0.12);
+}
+
+/* Wskaźnik galerii */
+.gallery-indicator {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  z-index: 2;
+  backdrop-filter: blur(10px);
+}
+
+.gallery-indicator i {
+  font-size: 1rem;
 }
 
 .realizacja-card img {
@@ -567,6 +590,222 @@ nav a:hover::after {
   color: var(--gray);
   line-height: 1.7;
   flex-grow: 1;
+}
+
+/* Lightbox Gallery Styles */
+.lightbox {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 10000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.lightbox.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 3rem;
+  cursor: pointer;
+  z-index: 10001;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.lightbox-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: rotate(90deg);
+}
+
+.lightbox-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 90vw;
+  height: 70vh;
+  position: relative;
+}
+
+.lightbox-image-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+#lightbox-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+#lightbox-image.loaded {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.lightbox-loader {
+  position: absolute;
+  display: none;
+}
+
+.lightbox-loader.active {
+  display: block;
+}
+
+.loader-spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.lightbox-nav {
+  position: absolute;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  font-size: 2rem;
+  padding: 1rem 1.5rem;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.lightbox-nav:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.lightbox-prev {
+  left: 30px;
+}
+
+.lightbox-next {
+  right: 30px;
+}
+
+.lightbox-info {
+  position: absolute;
+  bottom: 100px;
+  text-align: center;
+  color: white;
+}
+
+#lightbox-title {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.lightbox-counter {
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+/* Miniaturki */
+.lightbox-thumbnails {
+  position: absolute;
+  bottom: 20px;
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+}
+
+.lightbox-thumbnail {
+  width: 60px;
+  height: 60px;
+  border-radius: 5px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  opacity: 0.6;
+}
+
+.lightbox-thumbnail:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.lightbox-thumbnail.active {
+  border-color: var(--primary);
+  opacity: 1;
+}
+
+.lightbox-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Responsywność dla lightbox */
+@media (max-width: 768px) {
+  .lightbox-nav {
+    font-size: 1.5rem;
+    padding: 0.8rem 1.2rem;
+  }
+  
+  .lightbox-prev {
+    left: 10px;
+  }
+  
+  .lightbox-next {
+    right: 10px;
+  }
+  
+  .lightbox-close {
+    top: 10px;
+    right: 10px;
+    font-size: 2rem;
+    width: 50px;
+    height: 50px;
+  }
+  
+  .lightbox-thumbnails {
+    max-width: 90vw;
+    overflow-x: auto;
+  }
+  
+  .lightbox-thumbnail {
+    min-width: 50px;
+    width: 50px;
+    height: 50px;
+  }
 }
 
 /* O-firmie Section */
@@ -968,12 +1207,11 @@ footer {
 
   nav ul {
     flex-direction: column;
-    padding: 2rem; /* ZMIANA */
+    padding: 2rem;
     gap: 1.5rem;
     align-items: flex-start;
   }
 
-  /* ZMIANA: Poprawa wyglądu sekcji Hero na mobilnych */
   #hero {
     min-height: 100hv;
     padding: 5rem 0 5rem;
@@ -1026,7 +1264,7 @@ footer {
 
   .service-row,
   .service-row.reverse {
-    flex-direction: column; /* Układ jeden pod drugim na mobilnych */
+    flex-direction: column;
     gap: 2rem;
     margin-top: 3rem;
     text-align: center;
@@ -1072,7 +1310,7 @@ footer {
 
 @media (max-width: 576px) {
   .value-props-grid {
-    grid-template-columns: 1fr; /* Jedna kolumna na mobilnych */
+    grid-template-columns: 1fr;
   }
   .partners-logos {
     gap: 2rem;
@@ -1083,10 +1321,10 @@ footer {
 }
 
 /* ======================================= */
-/* ===== Style dla podstrony Usługi ===== */
+/* ===== Style dla podstrony Usług ===== */
 /* ======================================= */
 .page-container {
-  padding-top: 120px; /* Odsunięcie treści od stałego nagłówka */
+  padding-top: 120px;
 }
 
 #wszystkie-uslugi {
@@ -1102,7 +1340,6 @@ footer {
   gap: 2rem;
 }
 
-/* ZMIENIONE STYLE KARTY */
 .service-detail-card {
   background: white;
   border-radius: 20px;
@@ -1110,7 +1347,7 @@ footer {
   display: flex;
   flex-direction: column;
   transition: all 0.3s ease;
-  overflow: hidden; /* Ukrywa wystające rogi obrazka */
+  overflow: hidden;
 }
 
 .service-detail-card:hover {
@@ -1119,24 +1356,22 @@ footer {
   box-shadow: 0 10px;
 }
 
-/* NOWE STYLE DLA OBRAZKA */
 .service-card-img {
   width: 100%;
-  height: 200px; /* Stała wysokość dla wszystkich obrazków */
-  object-fit: cover; /* Gwarantuje, że obraz wypełni przestrzeń bez zniekształceń */
+  height: 200px;
+  object-fit: cover;
   transition: transform 0.3s ease;
 }
 
 .service-detail-card:hover .service-card-img {
-  transform: scale(1.05); /* Lekkie powiększenie obrazka po najechaniu */
+  transform: scale(1.05); 
 }
 
-/* NOWE STYLE DLA TREŚCI KARTY */
 .service-card-content {
   padding: 1.5rem 2rem 2rem;
   display: flex;
   flex-direction: column;
-  flex-grow: 1; /* Wyrównuje karty w jednym rzędzie do tej samej wysokości */
+  flex-grow: 1;
 }
 
 .service-card-content h3 {
@@ -1152,22 +1387,19 @@ footer {
   flex-grow: 1;
 }
 
-/* Przycisk na stronie głównej */
 .view-all-services-container {
   text-align: center;
   margin-top: 4rem;
 }
 
-/* ======================================= */
-/* ===== Nawigacja Okruszkowa (Breadcrumbs) ===== */
-/* ======================================= */
+/* nawigacja w pelnej ofercie */
 .breadcrumbs-container {
-  padding-top: 80px; /* Odsunięcie od stałego nagłówka */
+  padding-top: 80px; 
   background-color: var(--light);
   padding-bottom: 1.5rem;
   padding-top: calc(
     80px + 1.5rem
-  ); /* 80px to wysokość navbara + dodatkowy padding */
+  );
   border-bottom: 1px solid #e2e8f0;
 }
 

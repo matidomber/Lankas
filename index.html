@@ -173,11 +173,18 @@
         </p>
       </div>
       <div class="realizacje-grid">
-        <div class="realizacja-card reveal">
+        <div class="realizacja-card reveal" data-gallery="gallery1">
+          <div class="gallery-indicator">
+            <i class="fa-solid fa-images"></i>
+            <span>1 zdjęcie</span>
+          </div>
           <img
-            src="./images/realizacja1-placeholder.png"
+            src="./images/realizacje-images/realizacja1.png"
             alt="Monitoring w domu jednorodzinnym"
             loading="lazy"
+            class="gallery-trigger"
+            data-images='["./images/realizacje-images/realizacja1.png"]'
+            data-title="Monitoring w domu jednorodzinnym"
           />
           <div class="realizacja-content">
             <h3>Monitoring w domu jednorodzinnym</h3>
@@ -188,11 +195,18 @@
           </div>
         </div>
 
-        <div class="realizacja-card reveal">
+        <div class="realizacja-card reveal" data-gallery="gallery2">
+          <div class="gallery-indicator">
+            <i class="fa-solid fa-images"></i>
+            <span>1 zdjęcie</span>
+          </div>
           <img
-            src="./images/realizacja2-placeholder.png"
+            src="./images/realizacje-images/realizacja2.png"
             alt="Instalacja fotowoltaiczna"
             loading="lazy"
+            class="gallery-trigger"
+            data-images='["./images/realizacje-images/realizacja2.png"]'
+            data-title="Instalacja fotowoltaiczna 10 kWp"
           />
           <div class="realizacja-content">
             <h3>Instalacja fotowoltaiczna 10 kWp</h3>
@@ -203,11 +217,18 @@
           </div>
         </div>
 
-        <div class="realizacja-card reveal">
+        <div class="realizacja-card reveal" data-gallery="gallery3">
+          <div class="gallery-indicator">
+            <i class="fa-solid fa-images"></i>
+            <span>1 zdjęcie</span>
+          </div>
           <img
-            src="./images/realizacja3-placeholder.png"
+            src="./images/realizacje-images/realizacja3.png"
             alt="System alarmowy w biurze"
             loading="lazy"
+            class="gallery-trigger"
+            data-images='["./images/realizacje-images/realizacja3.png"]'
+            data-title="System alarmowy w biurze"
           />
           <div class="realizacja-content">
             <h3>System alarmowy w biurze</h3>
@@ -217,6 +238,38 @@
             </p>
           </div>
         </div>
+      </div>
+      <div id="lightbox" class="lightbox">
+        <button class="lightbox-close" aria-label="Zamknij galerię">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+        <div class="lightbox-content">
+          <button
+            class="lightbox-nav lightbox-prev"
+            aria-label="Poprzednie zdjęcie"
+          >
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          <div class="lightbox-image-container">
+            <img id="lightbox-image" src="" alt="" />
+            <div class="lightbox-loader">
+              <div class="loader-spinner"></div>
+            </div>
+          </div>
+          <button
+            class="lightbox-nav lightbox-next"
+            aria-label="Następne zdjęcie"
+          >
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+        </div>
+        <div class="lightbox-info">
+          <h3 id="lightbox-title"></h3>
+          <div class="lightbox-counter">
+            <span id="current-image">1</span> / <span id="total-images">1</span>
+          </div>
+        </div>
+        <div class="lightbox-thumbnails" id="lightbox-thumbnails"></div>
       </div>
     </section>
 

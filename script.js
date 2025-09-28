@@ -112,7 +112,6 @@ window.addEventListener("scroll", () => {
   }
 });
 
-
 const contactForm = document.getElementById("contactForm");
 if (contactForm) {
   contactForm.addEventListener("submit", function (e) {
@@ -139,7 +138,6 @@ if (contactForm) {
 // stopka rok
 document.getElementById("year").textContent = new Date().getFullYear();
 
-
 window.addEventListener("scroll", () => {
   const scrolled = window.pageYOffset;
   const hero = document.getElementById("hero");
@@ -147,7 +145,6 @@ window.addEventListener("scroll", () => {
     hero.style.transform = `translateY(${scrolled * 0.5}px)`;
   }
 });
-
 
 document.querySelectorAll(".service-card").forEach((card) => {
   card.addEventListener("mousemove", (e) => {
@@ -166,7 +163,6 @@ document.querySelectorAll(".service-card").forEach((card) => {
       "perspective(1000px) rotateX(0) rotateY(0) translateZ(0)";
   });
 });
-
 
 const heroTitle = document.querySelector(".hero-content h1");
 if (heroTitle) {
@@ -200,3 +196,208 @@ backToTopBtn.addEventListener("click", () => {
     behavior: "smooth",
   });
 });
+
+// Galeria zdjec w realizacjach
+const initLightbox = () => {
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImage = document.getElementById("lightbox-image");
+  const lightboxTitle = document.getElementById("lightbox-title");
+  const currentImageSpan = document.getElementById("current-image");
+  const totalImagesSpan = document.getElementById("total-images");
+  const thumbnailsContainer = document.getElementById("lightbox-thumbnails");
+  const loader = document.querySelector(".lightbox-loader");
+
+  let currentImages = [];
+  let currentIndex = 0;
+  let currentTitle = "";
+
+  // Otwieranie lightbox
+  document.querySelectorAll(".gallery-trigger").forEach((trigger) => {
+    trigger.addEventListener("click", (e) => {
+      e.preventDefault();
+      const imagesData = trigger.getAttribute("data-images");
+      currentTitle = trigger.getAttribute("data-title");
+
+      try {
+        currentImages = JSON.parse(imagesData);
+        currentIndex = 0;
+        openLightbox();
+      } catch (error) {
+        console.error("Error parsing images data:", error);
+      }
+    });
+  });
+
+  // Funkcja otwierania lightbox
+  const openLightbox = () => {
+    lightbox.classList.add("active");
+    document.body.style.overflow = "hidden";
+    updateLightbox();
+    createThumbnails();
+  };
+
+  // Funkcja zamykania lightbox
+  const closeLightbox = () => {
+    lightbox.classList.remove("active");
+    document.body.style.overflow = "";
+    setTimeout(() => {
+      lightboxImage.classList.remove("loaded");
+    }, 300);
+  };
+
+  // Aktualizacja wyświetlanego zdjęcia
+  const updateLightbox = () => {
+    if (currentImages.length === 0) return;
+
+    // Pokaż loader i ukryj zdjęcie
+    loader.classList.add("active");
+    lightboxImage.classList.remove("loaded");
+
+    // Załaduj nowe zdjęcie
+    const img = new Image();
+    img.onload = () => {
+      lightboxImage.src = currentImages[currentIndex];
+      lightboxImage.alt = `${currentTitle} - zdjęcie ${currentIndex + 1}`;
+      lightboxTitle.textContent = currentTitle;
+      currentImageSpan.textContent = currentIndex + 1;
+      totalImagesSpan.textContent = currentImages.length;
+
+      // Ukryj loader i pokaż zdjęcie z animacją
+      setTimeout(() => {
+        loader.classList.remove("active");
+        lightboxImage.classList.add("loaded");
+      }, 100);
+
+      // Aktualizuj aktywną miniaturkę
+      updateActiveThumbnail();
+    };
+    img.src = currentImages[currentIndex];
+
+    // Ukryj/pokaż przyciski nawigacji
+    const prevBtn = document.querySelector(".lightbox-prev");
+    const nextBtn = document.querySelector(".lightbox-next");
+    prevBtn.style.display = currentIndex === 0 ? "none" : "block";
+    nextBtn.style.display =
+      currentIndex === currentImages.length - 1 ? "none" : "block";
+  };
+
+  // Tworzenie miniaturek
+  const createThumbnails = () => {
+    thumbnailsContainer.innerHTML = "";
+
+    currentImages.forEach((imageSrc, index) => {
+      const thumbnail = document.createElement("div");
+      thumbnail.className = "lightbox-thumbnail";
+      if (index === currentIndex) {
+        thumbnail.classList.add("active");
+      }
+
+      const img = document.createElement("img");
+      img.src = imageSrc;
+      img.alt = `Miniaturka ${index + 1}`;
+
+      thumbnail.appendChild(img);
+      thumbnail.addEventListener("click", () => {
+        currentIndex = index;
+        updateLightbox();
+      });
+
+      thumbnailsContainer.appendChild(thumbnail);
+    });
+  };
+
+  // Aktualizacja aktywnej miniaturki
+  const updateActiveThumbnail = () => {
+    document.querySelectorAll(".lightbox-thumbnail").forEach((thumb, index) => {
+      if (index === currentIndex) {
+        thumb.classList.add("active");
+      } else {
+        thumb.classList.remove("active");
+      }
+    });
+  };
+
+  // Nawigacja - poprzednie zdjęcie
+  document.querySelector(".lightbox-prev").addEventListener("click", () => {
+    if (currentIndex > 0) {
+      currentIndex--;
+      updateLightbox();
+    }
+  });
+
+  // Nawigacja - następne zdjęcie
+  document.querySelector(".lightbox-next").addEventListener("click", () => {
+    if (currentIndex < currentImages.length - 1) {
+      currentIndex++;
+      updateLightbox();
+    }
+  });
+
+  // Zamykanie lightbox
+  document
+    .querySelector(".lightbox-close")
+    .addEventListener("click", closeLightbox);
+
+  // Zamykanie po kliknięciu w tło
+  lightbox.addEventListener("click", (e) => {
+    if (e.target === lightbox) {
+      closeLightbox();
+    }
+  });
+
+  // Obsługa klawiatury
+  document.addEventListener("keydown", (e) => {
+    if (!lightbox.classList.contains("active")) return;
+
+    switch (e.key) {
+      case "Escape":
+        closeLightbox();
+        break;
+      case "ArrowLeft":
+        if (currentIndex > 0) {
+          currentIndex--;
+          updateLightbox();
+        }
+        break;
+      case "ArrowRight":
+        if (currentIndex < currentImages.length - 1) {
+          currentIndex++;
+          updateLightbox();
+        }
+        break;
+    }
+  });
+
+  // Obsługa gestów przesuwania na urządzeniach dotykowych
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  lightboxImage.addEventListener("touchstart", (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
+
+  lightboxImage.addEventListener("touchend", (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  });
+
+  const handleSwipe = () => {
+    const swipeThreshold = 50;
+    const diff = touchStartX - touchEndX;
+
+    if (Math.abs(diff) > swipeThreshold) {
+      if (diff > 0 && currentIndex < currentImages.length - 1) {
+        // Przesunięcie w lewo - następne zdjęcie
+        currentIndex++;
+        updateLightbox();
+      } else if (diff < 0 && currentIndex > 0) {
+        // Przesunięcie w prawo - poprzednie zdjęcie
+        currentIndex--;
+        updateLightbox();
+      }
+    }
+  };
+};
+
+// Inicjalizacja lightbox po załadowaniu DOM
+document.addEventListener("DOMContentLoaded", initLightbox);
